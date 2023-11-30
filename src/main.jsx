@@ -1,53 +1,53 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import Login from './pages/login.jsx';
+import './App.css'
+import Login from './pages/Login.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import About from './pages/About.jsx';
-import Home from './pages/Home.jsx';
-import Products from './pages/Product.jsx';
-import ProductsList from './pages/ProductsList.jsx';
-
-
-
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import Products from './pages/Product.jsx'
+import ProductList from './pages/ProductsList.jsx';
+import SingleProduct from './pages/SingleProduct.jsx'
+import Layout from './components/Layout.jsx'
 
 
 const router = createBrowserRouter(
-
   [
     {
       path: "/",
-      element: <Login />
-    },
-
-    {
-      path: "/about",
-      element: <About />
+      element: <Login />,
     },
     {
-      path: "/home",
-      element: <Home />
-
-    },
-    {
-      path: "/products",
-      element: <Products />,
+      path: "/",
+      element: <Layout />,
       children: [
         {
-          path: "",
-          element: <ProductsList />
+          path: "/home",
+          element: <Home />
         },
         {
-          path: ":id",
-          element: <h1>Single Product</h1>
+          path: "/about",
+          element: <About />
+        },
+        {
+          path: "/products",
+          element: <Products />,
+          children: [
+            {
+              path: "",
+              element: <ProductList />
+            },
+            {
+              path: ":id",
+              element: <SingleProduct />
+            }
+          ]
         }
       ]
     },
-
   ]
-
 )
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
